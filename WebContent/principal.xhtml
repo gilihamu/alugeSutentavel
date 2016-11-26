@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" lang="br">
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+
+		<div style="margin-top: 40px" class="container-fluid">
+			<div class="row">
+				<h:form style="margin-bottom: 110px">
+
+					<div
+						class="text-center col-lg-push-2 col-lg-10 col-md-12 col-sm-12 col-xs-12">
+						<div class="text-center">
+
+							<div class="col-md-4  col-lg-3 col-sm-5 col-xs-12">
+								<p:autoComplete id="autoCompleteCidade" forceSelection="true"
+									value="#{autoCompleteController.cidade}" var="cidade"
+									itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+									completeMethod="#{autoCompleteController.completaCidade}"
+									dropdown="true" required="true" converter="converterCidade"
+									label="Cidade"
+									requiredMessage="Informe sua cidade e depois seu bairro">
+									<p:ajax event="itemSelect"
+										listener="#{autoCompleteController.handleSelect}" />
+
+								</p:autoComplete>
+								<p:watermark value="Cidade" for="autoCompleteCidade"></p:watermark>
+							</div>
+
+
+							<div class="visible-xs-block">
+								<span class="col-xs-12"> <br></br></span>
+
+							</div>
+							<div
+								class="col-md-2 col-lg-3 col-lg-push-0 col-sm-push-0 col-md-push-0 col-sm-2 col-xs-6  col-xs-push-3">
+								<p:commandLink update=":dataGridEmpresas" id="buscar"
+									value="Buscar" styleClass="btn btn-success btn-block"
+									actionListener="#{autoCompleteController.atualizaSelecaoEmpresa()}"
+									onclick="window.scrollTo(0, 200);" onstart="dlgLoading.show()"
+									onsuccess="dlgLoading.hide()">
+								</p:commandLink>
+							</div>
+						</div>
+					</div>
+
+					<div class="visible-xs-block">
+						<span class="col-xs-12"> <br></br></span>
+
+					</div>
+					<div class="visible-lg-block">
+						<span class="col-lg-12"> <br></br></span>
+
+					</div>
+				</h:form>
+				<div class="">
+					<h:form id="dataGridEmpresas">
+						<p:dataGrid var="objeto" columnClasses="logo,detail"
+							value="#{autoCompleteController.objetos}" columns="3"
+							layout="grid" rows="6" paginator="true" id="oj"
+							style="width:100%"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="6,12,16">
+
+							<p:panel header="#{objeto.nome} Quantidade: #{objeto.quantidade}"
+								style="text-align:center">
+								<h:panelGrid columns="2" style="width:100%">
+									<h:commandLink action="#{efetuaAluguelBean.verObjeto}">
+										<p:graphicImage library="imagens/objetos"
+											name="#{objeto.idObjeto}.jpg" height="100" width="150" />
+
+										<f:setPropertyActionListener target="#{efetuaAluguelBean.aluguel.objeto}"
+											value="#{objeto}" />
+									</h:commandLink>
+									
+								</h:panelGrid>
+								<h:outputText value="R$ #{objeto.valor}" />
+							</p:panel>
+
+						</p:dataGrid>
+					</h:form>
+
+				</div>
+				<p:dialog id="dlgLoading" closable="false" draggable="false"
+					widgetVar="dlgLoading" modal="true">
+					<h:graphicImage library="imagens/icones" name="carregando.gif" />
+				</p:dialog>
+			</div>
+
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

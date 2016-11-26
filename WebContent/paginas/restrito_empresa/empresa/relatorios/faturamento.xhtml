@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/empresa/principalEmpresa.xhtml">
+<ui:define name="titulo">
+    Relatório de Faturamento
+	</ui:define>
+	<ui:define name="corpo">
+		<div class="col-lg-6 col-md-8 col-xs-12 col-sm-12"
+			style="margin-top: 20px;">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Relatório de Faturamento</div>
+				<div class="panel-body">
+
+					<h:form>
+						<h:panelGrid>
+							<p:outputLabel value="Inicio: " />
+							<p:calendar value="#{relatorioBean.dataInicio}"
+								pattern="dd-MM-yyyy" locale="pt" />
+							<br />
+							<p:outputLabel value="Fim: " />
+							<p:calendar id="mask2" value="#{relatorioBean.dataFim}"
+								pattern="dd-MM-yyyy" locale="pt" />
+						</h:panelGrid>
+						<br />
+						<p:commandLink value="Gerar  Relatório" ajax="false"
+							actionListener="#{relatorioBean.faturamento()}"
+							styleClass="btn btn-primary" />
+
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

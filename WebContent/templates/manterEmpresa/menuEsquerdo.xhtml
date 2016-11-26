@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+	<h:form id="formPainel">
+		<ul class="nav nav-pills nav-stacked">
+			<li><p:commandLink value="Sobre a Empresa"
+					action="manterEmpresa.jsf?faces-redirect=true" /></li>
+			<li><p:commandLink value="Horarios de Funcionamento"
+					action="#{empresaBean.atualizarHorario}" /></li>
+			<li><p:commandLink value="Locais de Atendimento"
+					action="#{empresaBean.atualizarLocalAtendimento}" /></li>
+			<li><p:commandLink value="Formas De Pagamento"
+					action="#{pagPath.empresaformaDePagamento}" /></li>
+			<li><p:commandLink value="Categoria"
+					action="#{pagPath.manterCategoriaEmpresa}" /></li>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> Produtos <span class="caret"></span>
+
+			</a>
+				<ul class="dropdown-menu" role="menu" style="width: 100%;">
+					<li><p:commandLink value="Lanches"
+							action="#{pagPath.produtoLanche}" /></li>
+
+					<li><p:commandLink value="Bebidas"
+							action="#{pagPath.produtoBebida}" /></li>
+					<li><p:commandLink value="Pizza"
+							action="#{pagPath.produtoPizza}" /></li>
+					<li><p:commandLink value="Marmitex"
+							action="#{pagPath.produtoMarmitex}" /></li>
+					<li><p:commandLink value="Água"
+							action="#{pagPath.produtoAgua}" /></li>
+					<li><p:commandLink value="Gás" action="#{pagPath.produtoGas}" />
+					</li>
+					<li><p:commandLink value="Avulso" action="#{pagPath.avulsos}" />
+					</li>
+				</ul></li>
+
+		</ul>
+	</h:form>
+
+</ui:composition>
+</html>
+

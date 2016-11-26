@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/principal.xhtml">
+
+<ui:define name="titulo">
+   Fale Conosco
+	</ui:define>
+	<ui:define name="corpo">
+		<div class="container">
+			<h:form id="formFaleConosco">
+				<div class="col-lg-9 col-md-12 col-xs-12 col-sm-12"
+					style="margin-top: 20px; margin: auto; float: none;">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Enviar E-mail</div>
+						<div class="panel-body">
+
+							<h:outputText value="aluguesustentavel@gmail.com"
+								style="font-size:17px;" styleClass="pull-right" />
+							<p:inputText value="#{emailFaleConosco.nome}"
+								styleClass="col-lg-12 col-sm-12 col-xs-12 col-md-12"
+								placeholder="Nome" />
+							<p:editor value="#{emailFaleConosco.menssagem}"
+								style="margin-top: 10px;" styleClass="col-lg-12 col-sm-12 col-xs-12 col-md-12"/>
+
+							<div class="pull-right">
+								<p:commandLink actionListener="#{emailFaleConosco.sendEmail}"
+									value="Enviar" id="btSalvar" onstart="blokpendencia.show()"
+									onsuccess="blokpendencia.hide()" styleClass="btn btn-success" />
+								&nbsp;&nbsp;
+								<p:commandLink value="Cancelar" ajax="false"
+									styleClass="btn btn-danger" action="principal.jsf" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+		<p:blockUI widgetVar="blokpendencia" block=":formFaleConosco">
+			<h:graphicImage library="imagens/icones"
+				name="carregando.gif" />
+		</p:blockUI>
+		<p:dialog id="dlgLoading" closable="false" draggable="false"
+			widgetVar="dlgLoading" modal="true">
+			<h:graphicImage library="imagens/icones" name="carregando.gif" />
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+</html>

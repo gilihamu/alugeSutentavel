@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="titulo">
+    Cadastro
+	</ui:define>
+	<ui:define name="corpo">
+		<div style="margin-top: 60px;">
+			<h:form id="cadastro" prependId="false">
+				<div class="container-fluid">
+					<div class="row">
+						<div
+							class="col-lg-9  col-lg-pull-1 col-lg-push-2 col-md-12 col-xs-12">
+							<div class=" panel panel-primary">
+								<div class="panel-heading">Cadastro De Aluguel</div>
+								<div class="panel-body">
+									<div class="col-lg-10 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:fileUpload label="Procurar imagem" fileUploadListener="#{cadastroAluguelBean.handleFileUpload}" id="id" mode="advanced"
+                     auto="true" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+									<h:outputText
+								value="* A imagem a ser inserida deverá ter o formato de JPGF" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+
+										<p:inputText value="#{cadastroAluguelBean.objeto.nome}"
+											size="30" id="nome" required="true" label="Nome"
+											requiredMessage="Informe seu nome completo"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:watermark for="nome" value="Titulo *" />
+										<p:message for="nome" />
+									</div>
+									<div class="col-lg-10 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<h:panelGrid columns="1" style="margin-bottom: 10px">
+											<p:inputText id="quantidade" label="Quantidade *" 
+												value="#{cadastroAluguelBean.objeto.quantidade}" />
+											<p:slider for="quantidade" />
+											<p:watermark for="quantidade" value="quantidade *" />
+										<p:message for="quantidade" />
+										</h:panelGrid>
+
+									</div>
+									<div class="col-lg-10 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:inputText id="valor" label="Valor" requiredMessage="Informe o valor do aluguel"
+											value="#{cadastroAluguelBean.objeto.valor}"  >
+											<f:convertNumber pattern="#,###,##0.00" />
+											</p:inputText>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+
+										<p:inputTextarea rows="5" cols="30" counter="display"
+											id="descricao" required="true" label="descricao" completeMethod="cadastroAluguelBean.objeto.descricao"
+											maxlength="500"
+											requiredMessage="Informe a descrição do produto"
+											counterTemplate="{0} caracteres restante."
+											autoResize="false"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<h:outputText id="display" />
+										<p:watermark for="descricao" value="Informe aqui a Descricao do objeto que deseja anunciar. Informe tambem as condicoes para a locacao do mesmo. *" />
+										<p:message for="descricao" />
+									</div>
+
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "
+										style="margin-top: 10px">
+										<div class="pull-right">
+											<p:commandLink action="#{cadastroAluguelBean.cadastraObjeto}"
+												value="Salvar" id="btSalvar" onclick="blokpendencia.show()"
+												styleClass="btn btn-primary " ajax="false" />
+											&nbsp;&nbsp;
+											<p:commandLink value="Cancelar" styleClass="btn btn-danger" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p:blockUI widgetVar="blokpendencia" block=":cadastro">
+					<h:graphicImage library="imagens/icones" name="carregando.gif" />
+				</p:blockUI>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

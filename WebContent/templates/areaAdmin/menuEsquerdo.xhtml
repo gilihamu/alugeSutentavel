@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+
+
+	<h:form id="formPainel">
+		<ul class="nav nav-pills nav-stacked">
+
+			<li><p:commandLink value="Empresa" action="#{empresaBean.novo}" />
+			</li>
+			<li><p:commandLink value="Forma De Pagamento"
+					action="/paginas/admin/empresa/configuracoes/manterFormaDePagamento.jsf?faces-redirect=true" />
+			</li>
+		</ul>
+	</h:form>
+
+
+</ui:composition>
+</html>
+

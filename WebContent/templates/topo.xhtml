@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+<ui:composition>
+	<!-- Display DeskTop -->
+	<h:form>
+		<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<h:graphicImage library="imagens/icones" name="logo.png"
+					style="width: 216px;" />
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><h:commandLink action="/principal.jsf?faces-redirect=true"
+							id="home" value="Inicio" /></li>
+					<li><h:commandLink oncomplete="dlgAjuda.show()" id="lnkAjuda"
+							value="Quem Somos" /></li>
+					<li><h:commandLink id="faleConosco" value="Fale Conosco"
+							action="/paginas/publico/clienteEmailContato.jsf?faces-redirect=true" /></li>
+				</ul>
+				<sec:isAnonymous>
+					<ul class="nav navbar-nav navbar-right">
+						<li><h:commandLink value="Quero me cadastrar"
+								action="#{pagPath.novoCadastroDeUsuario}" styleClass="btn " /></li>
+						<li><h:commandLink value="Entrar"
+								action="/paginas/publico/login.jsf?faces-redirect=true"
+								styleClass="btn btn-primary" /></li>
+					</ul>
+				</sec:isAnonymous>
+				<sec:ifAnyGranted roles="ROLE_SUP">
+
+					<ul class="nav navbar-nav navbar-right">
+
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+								<span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><h:commandLink value="Clientes"
+										action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true" /></li>
+								<li><h:commandLink value="Editar Conta"
+										action="#{clienteBean.alterarCliente}">
+
+									</h:commandLink></li>
+								<li><h:commandLink value="Empresa"
+										action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true" /></li>
+
+
+								<li><a
+									href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+										Sair</a></li>
+							</ul></li>
+					</ul>
+
+
+
+				</sec:ifAnyGranted>
+
+				<sec:ifAnyGranted roles="ROLE_ADM">
+					<ul class="nav navbar-nav navbar-right">
+
+
+
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+								<span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><h:commandLink value="Administrativo"
+										action="#{pagPath.administrativo}" /></li>
+								<li><h:commandLink value="Editar Conta"
+										action="#{clienteBean.alterarCliente}">
+
+									</h:commandLink></li>
+								<li><a
+									href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+										Sair</a></li>
+							</ul></li>
+					</ul>
+				</sec:ifAnyGranted>
+				<sec:ifAnyGranted roles="ROLE_CLI">
+					<ul class="nav navbar-nav navbar-right">
+
+
+
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+								<span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><h:commandLink value="Meus Objetos alugados"
+										action="/paginas/publico/meusPedidos.jsf?faces-redirect=true">
+									</h:commandLink></li>
+								<li><h:commandLink value="Anunciar Objeto(Disponibilizar para locacao)"
+										action="/paginas/publico/cadastroAluguel.jsf?faces-redirect=true">
+									</h:commandLink></li>
+								<li><h:commandLink value="Alterar Dados"
+										action="#{clienteBean.alterarCliente}">
+
+									</h:commandLink></li>
+								<li><a
+									href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+										Sair</a></li>
+							</ul></li>
+					</ul>
+
+				</sec:ifAnyGranted>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid --> </nav>
+	</h:form>
+</ui:composition>
+</html>

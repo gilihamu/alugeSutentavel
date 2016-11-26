@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="titulo">
+    Alterar Cadastro
+	</ui:define>
+	<ui:define name="corpo">
+		<div style="margin-top: 60px;">
+			<h:form id="atualizarCadastro">
+				<div class="container-fluid">
+					<div class="row">
+						<div
+							class="col-lg-9  col-lg-pull-1 col-lg-push-2 col-md-12 col-xs-12">
+							<div class=" panel panel-primary">
+								<div class="panel-heading">Cadastro</div>
+								<div class="panel-body">
+
+									<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+
+										<p:inputText value="#{clienteBean.cliente.nome}" size="30"
+											id="nome" required="true" label="Nome"
+											requiredMessage="Informe seu nome completo"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:watermark for="nome" value="Nome *" />
+										<p:message for="nome" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:inputText value="#{clienteBean.cliente.email}" size="30"
+											id="email" required="true"
+											validatorMessage="E-mail deve ser de no minimo 5 caracteres"
+											label="E-mail" requiredMessage="Informe seu e-mail"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<f:validateLength minimum="5" />
+										</p:inputText>
+										<p:watermark for="email" value="E-mail *" />
+										<p:message for="email" />
+									</div>
+
+
+									<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:password value="#{clienteBean.cliente.senha}" id="senha"
+											required="true" feedback="true"
+											promptLabel="Imforme uma Senha" weakLabel="Fraca"
+											goodLabel="Boa" strongLabel="Forte" match="confSenha"
+											label="Senha" requiredMessage="Informe uma senha"
+											validatorMessage="Senha confirmada errada."
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:message for="senha" />
+										<p:watermark for="senha" value="Senha *" />
+									</div>
+
+									<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:password value="#{clienteBean.cliente.senha}"
+											id="confSenha" required="true"
+											requiredMessage="Informe uma senha"
+											styleClass="col-lg-12 col-md-12 col-sm-6 col-xs-12" />
+										<p:watermark for="confSenha" value="Repete a senha *" />
+										<p:message for="confSenha" />
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:inputMask value="#{clienteBean.cliente.telefone}"
+											id="telefone" mask="(99) 9999-9999"
+											converter="converterTelefone"
+											styleClass="col-lg-12 col-md-12 col-sm-6 col-xs-12" />
+										<p:watermark for="telefone" value="Telefone Fixo" />
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-9 col-xs-12"
+										style="margin-top: 10px">
+										<p:inputMask value="#{clienteBean.cliente.celular}"
+											id="celular" mask="(99) 9999-9999"
+											converter="converterTelefone"
+											styleClass="col-lg-12 col-md-12 col-sm-6 col-xs-12" />
+										<p:watermark for="celular" value="Celular" />
+									</div>
+
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText id="cep" size="9" maxlength="8" />
+										<a onclick="findCEP()" href="#" class="btn btn-info">Buscar</a>
+										<p:watermark for="cep" value="Cep" />
+									</div>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.logradouro}"
+											size="30" id="logradouro" required="true"
+											requiredMessage="Informe sua rua"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:watermark for="logradouro" value="Rua/Av./Logradouro *" />
+										<p:message for="logradouro" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.bairro}" size="30"
+											id="bairro" required="true"
+											requiredMessage="Informe seu bairro"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:watermark for="bairro" value="Bairro *" />
+										<p:message for="bairro" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.cidade}" size="30"
+											id="cidade" required="true"
+											requiredMessage="Informe sua cidade"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:watermark for="cidade" value="Cidade *" />
+										<p:message for="cidade" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.UF}" id="uf"
+											required="true" requiredMessage="Informe seu Estado"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:message for="uf" />
+										<p:watermark for="uf" value="Estado *" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.numero}" id="numero"
+											required="true"
+											requiredMessage="Informe o número de sua casa"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:message for="numero" />
+										<p:watermark for="numero" value="Número *" />
+									</div>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.complemento}"
+											id="complemento"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+
+										<p:watermark for="complemento" value="Complemento" />
+									</div>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "
+										style="margin-top: 10px">
+										<div class="pull-right">
+											<p:commandLink action="#{clienteBean.atualizarSalvarCliente}"
+												value="Salvar" id="btSalvar" onclick="blokpendencia.show()"
+												update=":atualizarCadastro" styleClass="btn btn-primary "
+												ajax="false">
+												<a
+													href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" />
+											</p:commandLink>
+											&nbsp;&nbsp;
+											<p:commandLink value="Cancelar" styleClass="btn btn-danger" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p:blockUI widgetVar="blokpendencia" block=":atualizarCadastro">
+					<h:graphicImage library="imagens/icones"
+						name="atualizandoCadastro.gif" />
+				</p:blockUI>
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

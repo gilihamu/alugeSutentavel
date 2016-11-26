@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/pedido/principalCompra.xhtml">
+
+	<ui:define name="corpo">
+		<h:form>
+			<p:dataGrid value="#{pedidoBean.listAguaDM}" var="agua"
+				paginator="true" columns="1" rows="6" styleClass="col-lg-12">
+				<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<h:graphicImage library="imagens/produto/agua"
+							name="#{agua.idProduto}.gif" width="100" height="100" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<h:outputText title="Descrição" value="#{agua.descricao}"
+							style="font-size: 20px;" />
+					</div>
+
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
+						<h:panelGrid columns="2" style="font-size: 20px;">
+							<h:outputText value="R$" />
+							<h:outputText value="#{agua.valor}">
+								<f:convertNumber pattern="#,###,##0.00" />
+							</h:outputText>
+						</h:panelGrid>
+					</div>
+					<div class="col-lg-6 col-md-9 col-sm-12 col-xs-12">
+						
+					</div>
+
+					<div
+						class="col-lg-3 col-md-9 col-md-push-2 text-center col-lg-push-0 col-sm-12 col-xs-12">
+						<p:commandLink value="Personalizar"
+							actionListener="#{pedidoBean.personalizaAgua()}"
+							disabled="#{!agua.ativo}" styleClass="btn btn-warning"
+							oncomplete="dlgEditarProduto.show()" update=":idEditar">
+						</p:commandLink>
+						<div class="visible-lg-block visible-md-block">
+							<span class="col-lg-12 col-md-12"></span>
+
+						</div>
+
+						<p:commandLink
+							value="#{agua.ativo ? 'Adicionar' : 'Indisponivel'}"
+							actionListener="#{pedidoBean.adicionaAgua()}"
+							disabled="#{!agua.ativo}" update=":formPainel" id="buttonAdd"
+							styleClass="btn btn-info" style="width:108px;">
+						</p:commandLink>
+					</div>
+				</div>
+				<p:separator></p:separator>
+			</p:dataGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

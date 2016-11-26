@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="titulo">
+    Cadastro
+	</ui:define>
+	<ui:define name="corpo">
+		<div style="margin-top: 60px;">
+			<h:form id="cadastro" prependId="false">
+				<div class="container-fluid">
+					<div class="row">
+						<div
+							class="col-lg-9  col-lg-pull-1 col-lg-push-2 col-md-12 col-xs-12">
+							<div class=" panel panel-primary">
+								<div class="panel-heading">Aluguel</div>
+								<div class="panel-body">
+
+									<h:panelGrid columns="2">
+										<h:graphicImage width="150" height="100"
+											library="imagens/objetos"
+											name="#{efetuaAluguelBean.aluguel.objeto.idObjeto}.jpg"
+											style="float:left" />
+										<h:panelGrid columns="2">
+											<h:outputText value="Título: " style="float:right;" />
+											<h:outputText
+												value="#{efetuaAluguelBean.aluguel.objeto.nome}" />
+											<h:outputText value="Quantidade: " style="float:right;" />
+											<h:inputText
+												value="#{efetuaAluguelBean.aluguel.objeto.quantidade}" />
+											<h:outputText value="Valor: " style="float:right;" />
+											<h:outputText
+												value="#{efetuaAluguelBean.aluguel.objeto.valor}" />
+											<h:outputText value="Descrição: " style="float:right;" />
+											<h:outputText
+												value="#{efetuaAluguelBean.aluguel.objeto.descricao}" />
+										</h:panelGrid>
+									</h:panelGrid>
+
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "
+										style="margin-top: 10px">
+										<div class="pull-right">
+											<p:commandLink action="#{efetuaAluguelBean.salvarAluguel}"
+												value="Alugar" id="btSalvar" onclick="blokpendencia.show()"
+												styleClass="btn btn-primary " ajax="false" />
+											&nbsp;&nbsp;
+											<p:commandLink value="Cancelar" styleClass="btn btn-danger" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p:blockUI widgetVar="blokpendencia" block=":cadastro">
+					<h:graphicImage library="imagens/icones" name="carregando.gif" />
+				</p:blockUI>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

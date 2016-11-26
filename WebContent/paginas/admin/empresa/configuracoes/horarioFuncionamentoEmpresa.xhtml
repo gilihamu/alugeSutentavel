@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition
+	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+
+	<ui:define name="corpo">
+		<h:form id="form">
+			<p:dataTable var="horaFunc"
+				value="#{empresaBean.horarioFuncionamentoList}">
+				<f:facet name="header">
+				Horarios de Atendimento
+				</f:facet>
+				<p:column headerText="Dia da Semana">
+					<h:outputText value="#{horaFunc.diaDaSemana.descricao}" />
+				</p:column>
+				<p:column headerText="Inicio">
+					<center>
+						<p:inputMask value="#{horaFunc.horaInicio}" mask="99:99" />
+					</center>
+				</p:column>
+				<p:column headerText="Fim">
+					<center>
+						<p:inputMask value="#{horaFunc.horaFim}" mask="99:99" />
+					</center>
+				</p:column>
+				<p:column headerText="Funciona neste dia ?">
+					<center>
+						<p:selectBooleanCheckbox value="#{horaFunc.ativo}" />
+					</center>
+				</p:column>
+			</p:dataTable>
+			<div>
+				<p:commandLink value="Salvar"
+					actionListener="#{empresaBean.salvarHorario}" ajax="false"
+					styleClass="btn btn-success" />
+				<p:commandLink value="Cencelar" ajax="false"
+					action="ManterEmpresa.jsf?faces-redirect=true"
+					styleClass="btn btn-danger" />
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

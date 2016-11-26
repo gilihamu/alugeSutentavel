@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition
+	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+	<ui:define name="corpo">
+
+		<h:form id="formManterEmpresa">
+			<div class="panel panel-primary" style="margin-top: 10px">
+				<div class="panel-heading">
+					<h3 class="panel-title">Informações Gerais</h3>
+				</div>
+				<div class="panel-body">
+					<h:panelGrid columns="2">
+						<h:graphicImage width="150" height="100" library="imagens/empresa"
+							name="Empresa#{empresaBean.empresa.idEmpresa}.jpg"
+							style="float:left" />
+						<h:panelGrid columns="2">
+							<h:outputText value="Razão Social: " style="float:right;" />
+							<h:outputText value="#{empresaBean.empresa.razaoSocial}" />
+							<h:outputText value="Telefone: " style="float:right;" />
+							<h:outputText value="#{empresaBean.empresa.telefone}" />
+						</h:panelGrid>
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+						<h:outputText value="Cidade: " style="float:right;" />
+						<h:outputText
+							value="#{empresaBean.empresa.endereco.bairroCidade.cidade}" />
+						<h:outputText value="Bairro: " style="float:right;" />
+						<h:outputText value="#{empresaBean.empresa.endereco.bairroCidade}" />
+						<h:outputText value="Logradouro: " style="float:right;" />
+						<h:outputText value="#{empresaBean.empresa.endereco.logradouro}" />
+						<h:outputText value="Numero: " style="float:right;" />
+						<h:outputText value="#{empresaBean.empresa.endereco.numero}" />
+						<h:outputText value="CEP: " style="float:right;" />
+						<h:outputText value="#{empresaBean.empresa.endereco.cep}" />
+					</h:panelGrid>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
